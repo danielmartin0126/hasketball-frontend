@@ -19,18 +19,25 @@ class PlayersContainer extends React.Component {
 					})
 				})
     }
-        
 
+		showMorePlayers = () => {
+			this.setState({
+				start: this.state.start += 50,
+				end: this.state.end += 50
+			})
+		}
 
 
     render(){
         return(
-				<div className="ui cards">
-					<p>hi</p>
-            {this.state.players.slice(this.state.start,this.state.end).map(player => {
-               return <PlayerCard player={player}/>
-            })}
-				</div>
+					<React.Fragment>
+						<button onClick={this.showMorePlayers}>More Players</button>
+						<div className="ui cards">
+		            {this.state.players.slice(this.state.start,this.state.end).map(player => {
+		               return <PlayerCard player={player}/>
+		            })}
+						</div>
+			</React.Fragment>
 				)
 		}
 
