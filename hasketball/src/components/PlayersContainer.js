@@ -20,23 +20,38 @@ class PlayersContainer extends React.Component {
 				})
     }
 
-		showMorePlayers = () => {
-			this.setState({
-				start: this.state.start += 50,
-				end: this.state.end += 50
-			})
+		nextPage = () => {
+			if (this.state.end > this.state.players.length) {
+		 	}
+			else {
+				this.setState({
+					start: this.state.start += 50,
+					end: this.state.end += 50
+				})
+			}
+		}
+
+		backPage = () => {
+			if (this.state.start > 0) {
+				this.setState({
+					start: this.state.start -= 50,
+					end: this.state.end -= 50
+				})
+			}
 		}
 
 
     render(){
         return(
 					<React.Fragment>
-						<button onClick={this.showMorePlayers}>More Players</button>
+						<button onClick={this.backPage}>Back Page</button>
+						<button onClick={this.nextPage}>Next Page</button>
 						<div className="ui cards">
 		            {this.state.players.slice(this.state.start,this.state.end).map(player => {
 		               return <PlayerCard player={player}/>
 		            })}
 						</div>
+
 			</React.Fragment>
 				)
 		}
