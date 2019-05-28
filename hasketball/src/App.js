@@ -3,6 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import PlayersContainer from './components/PlayersContainer';
 import Navbar from './components/Navbar';
+import { Switch, Route, withRouter } from 'react-router-dom'
+import Login from './components/Login';
+import Team from './components/Team';
+import Register from './components/Register';
+
+
 
 class App extends React.Component {
 
@@ -18,9 +24,12 @@ class App extends React.Component {
 
   render() {
     return (<div className="App">
+
         <Navbar filter={this.state.filter} handleFilter={this.handleFilter}/>
-        {console.log("state",this.state.filtered)}
-        <PlayersContainer filtered={this.state.filtered}/>
+        <Route path="/login" render={()=> <Login />}/>
+        <Route path="/team" render={()=> <Team />}/>
+        <Route path="/register" render={()=> <Register />}/>
+        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered}/>}/>
     </div>
     )};
 }
