@@ -56,8 +56,10 @@ class PlayersContainer extends React.Component {
 						<button onClick={this.backPage}>Back Page</button>
 						<button onClick={this.nextPage}>Next Page</button>
 						<div className="ui cards">
-								{this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-		               return <PlayerCard player={player}/>})}
+								{this.props.filtered.length > 0 ? this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+		               return <PlayerCard player={player}/>}) : this.state.players.slice(this.state.start,this.state.end).map(player => {
+										return <PlayerCard player={player} />
+								 })}}
 						</div>
 
 			</React.Fragment>
