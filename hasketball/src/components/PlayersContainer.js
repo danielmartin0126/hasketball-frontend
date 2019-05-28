@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayerCard from './PlayerCard';
+import ShowModal from './ShowModal'
 import { directive } from '@babel/types';
 
 
@@ -24,40 +25,35 @@ class PlayersContainer extends React.Component {
 			if (this.state.end > this.state.players.length) {
 		 	}
 			else {
-				this.setState({
-					start: this.state.start += 50,
-					end: this.state.end += 50
+				this.setState( prevState => {
+					return {start: prevState.start += 50,
+						end: prevState.end += 50}
 				})
 			}
 		}
 
 		backPage = () => {
 			if (this.state.start > 0) {
-				this.setState({
-					start: this.state.start -= 50,
-					end: this.state.end -= 50
+				this.setState( prevState => {
+					return {start: prevState.start -= 50, end: prevState.end -= 50}
 				})
 			}
 		}
 
-
     render(){
-			console.log(this.state.players)
         return(
 					<React.Fragment>
 						<button onClick={this.backPage} className="ui left attached button">Back</button>
 
-						<div class="ui input">
+						<div className="ui input">
 							<input type="text" placeholder="Search..."/>
 						</div>
 						<button onClick={this.nextPage} className="right attached ui button">Next</button>
-
 						<div className="ui cards">
 		            {this.state.players.slice(this.state.start,this.state.end).map(player => {
-		               return <PlayerCard player={player}/>
+		               return <PlayerCard player={player} />
 		            })}
 						</div>
-
 			</React.Fragment>
 				)
 		}
