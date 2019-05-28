@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayerCard from './PlayerCard';
 import '../App.css';
+import ShowModal from './ShowModal'
 import { directive } from '@babel/types';
 
 
@@ -25,18 +26,17 @@ class PlayersContainer extends React.Component {
 			if (this.state.end > this.state.players.length) {
 		 	}
 			else {
-				this.setState({
-					start: this.state.start += 50,
-					end: this.state.end += 50
+				this.setState( prevState => {
+					return {start: prevState.start += 50,
+						end: prevState.end += 50}
 				})
 			}
 		}
 
 		backPage = () => {
 			if (this.state.start > 0) {
-				this.setState({
-					start: this.state.start -= 50,
-					end: this.state.end -= 50
+				this.setState( prevState => {
+					return {start: prevState.start -= 50, end: prevState.end -= 50}
 				})
 			}
 		}
@@ -53,15 +53,19 @@ class PlayersContainer extends React.Component {
     render(){
         return(
 					<React.Fragment>
-						<button onClick={this.backPage}>Back Page</button>
-						<button onClick={this.nextPage}>Next Page</button>
+						<button onClick={this.backPage} className="ui left attached button">Back</button>
+
+						<div className="ui input">
+							<input type="text" placeholder="Search..."/>
+						</div>
+						<button onClick={this.nextPage} className="right attached ui button">Next</button>
 						<div className="ui cards">
 								{this.props.filtered.length > 0 ? this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
 		               return <PlayerCard player={player}/>}) : this.state.players.slice(this.state.start,this.state.end).map(player => {
 										return <PlayerCard player={player} />
 								 })}}
-						</div>
 
+						</div>
 			</React.Fragment>
 				)
 		}
