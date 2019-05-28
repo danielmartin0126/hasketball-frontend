@@ -31,3 +31,13 @@
     transform: rotate(360deg);
   }
 }
+
+#navbar {
+  justify-content: space-between;
+  padding: 2%;
+}
+
+#searchbar {
+  justify-content: center;
+  margin-bottom: 2%;
+}
