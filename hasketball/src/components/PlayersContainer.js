@@ -42,10 +42,16 @@ class PlayersContainer extends React.Component {
 
 
     render(){
+			console.log(this.state.players)
         return(
 					<React.Fragment>
-						<button onClick={this.backPage}>Back Page</button>
-						<button onClick={this.nextPage}>Next Page</button>
+						<button onClick={this.backPage} className="ui left attached button">Back</button>
+
+						<div class="ui input">
+							<input type="text" placeholder="Search..."/>
+						</div>
+						<button onClick={this.nextPage} className="right attached ui button">Next</button>
+
 						<div className="ui cards">
 		            {this.state.players.slice(this.state.start,this.state.end).map(player => {
 		               return <PlayerCard player={player}/>
