@@ -72,7 +72,7 @@ class App extends React.Component {
   handleCreateAccount = (user) => {
     console.log("create", user)
   }
-  
+
     draftPlayer = (e) => {
     const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
     this.setState((prevState) => {
@@ -92,11 +92,11 @@ class App extends React.Component {
   render() {
     console.log("App is rendering",this.state)
     return (<div className="App">
-        <Navbar filter={this.state.filter} handleFilter={this.handleFilter} currentUser={this.state.currentUser} handleLogout={this.handleLogout backPage={this.backPage} nextPage={this.nextPage}}/>
+        <Navbar filter={this.state.filter} handleFilter={this.handleFilter} currentUser={this.state.currentUser} handleLogout={this.handleLogout} backPage={this.backPage} nextPage={this.nextPage}/>
         <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
         <Route path="/team" render={()=> <Team currentUser={this.state.currentUser} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
         <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} handleCreateAccount={this.handleCreateAccount}/>}/>
-        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>
 
     </div>
     )};

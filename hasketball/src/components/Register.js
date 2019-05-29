@@ -17,13 +17,13 @@ class Register extends React.Component {
     constructor() {
         super();
         this.state = initialState
-    }
- 
+     }
+
     handleChange = e => {
      const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
      this.setState({ fields: newFields });
    };
- 
+
    handleSubmit = e => {
      e.preventDefault()
      console.log("what you entered",this.state.fields);
@@ -45,10 +45,10 @@ class Register extends React.Component {
        }
      })
      }
- 
+
      render() {
          const { fields } = this.state
-        return( 
+        return(
          <div>
          <div className="ui form error">
            {
@@ -93,6 +93,6 @@ class Register extends React.Component {
          </div>
         </div>
         )}
- 
+
 }
 export default Register;
