@@ -15,15 +15,12 @@ class ShowModal extends React.Component {
       this.setState({
         playerStats: data.data[0]
       })
-      console.log(data.data[0])
       })
   }
 
 
 
   render(){
-    console.log(teamLogos[this.props.player.team_name]);
-    console.log(this.props.player.team_name)
     return(
       <Modal trigger={<div id={this.props.player.api_id} onClick={this.showStats} className="ui basic blue button">View Stats</div>}>
         <Modal.Header>{this.props.player.f_name +" "+ this.props.player.l_name}</Modal.Header>

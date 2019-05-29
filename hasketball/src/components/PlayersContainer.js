@@ -46,8 +46,29 @@ class PlayersContainer extends React.Component {
 			return (p.f_name + " " + p.l_name)
 		}
 
+		findPlayers = () => {
+			return this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+				 return <PlayerCard player={player}/>
+			 })
+		}
 
-	
+		findTeams = () => {
+				return this.state.players.filter(p => 		p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+				return <PlayerCard player={player} />
+			})
+		}
+
+
+		renderSearch = () => {
+			let foo = [this.findTeams(), this.findPlayers()]
+			return foo
+		}
+
+		renderFiftyPlayers = () => {
+			return this.state.players.slice(this.state.start,this.state.end).map(player => {
+			 return <PlayerCard player={player} />
+			})
+		}
 
 
     render(){
@@ -60,11 +81,7 @@ class PlayersContainer extends React.Component {
 						</div>
 						<button onClick={this.nextPage} className="right attached ui button">Next</button>
 						<div className="ui cards">
-								{this.props.filtered.length > 0 ? this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-		               return <PlayerCard player={player}/>}) : this.state.players.slice(this.state.start,this.state.end).map(player => {
-										return <PlayerCard player={player} />
-								 })}}
-
+								{this.props.filtered.length > 0 ? this.renderSearch() : this.renderFiftyPlayers()}
 						</div>
 			</React.Fragment>
 				)
