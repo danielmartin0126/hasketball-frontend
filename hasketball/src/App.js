@@ -24,14 +24,18 @@ class App extends React.Component {
   }
 
   handleUserLogin = (user) => {
-    this.setState = ({currentUser: user})
+    console.log("in handle userlogin",user)
+    this.setState({
+      currentUser: user
+    },console.log("State",this.state))
   }
 
   render() {
+    console.log("App is rendering",this.state)
     return (<div className="App">
 
         <Navbar filter={this.state.filter} handleFilter={this.handleFilter}/>
-        <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin}/>}/>
+        <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
         <Route path="/team" render={()=> <Team />}/>
         <Route path="/register" render={()=> <Register />}/>
         <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered}/>}/>

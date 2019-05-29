@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 const initialState = {
@@ -27,7 +28,7 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(this.state.fields);
+    console.log("what you entered",this.state.fields);
     fetch('http://localhost:3000/api/v1/auth', {
       method: "POST",
       headers: {
@@ -41,14 +42,15 @@ class Login extends React.Component {
       if (data.error) {
         this.setState({error: true})
       } else {
+          console.log("giving you:",data)
         this.props.handleUserLogin(data)
         this.props.history.push("/team")
-        console.log('data from api', data)
       }
     })
     }
 
     render() {
+        console.log("logprops",this.props)
         const { fields } = this.state
        return( 
         <div>
@@ -93,4 +95,4 @@ class Login extends React.Component {
 
 
 }
-export default Login;
+export default withRouter(Login);
