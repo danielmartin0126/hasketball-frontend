@@ -56,10 +56,12 @@ class App extends React.Component {
   }
 
   draftPlayer = (e) => {
-    const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
-    this.setState((prevState) => {
-      return {myTeam: [...prevState.myTeam, playerToDraft]}
-    })
+      const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
+        if (!this.state.myTeam.includes(playerToDraft)){
+        this.setState((prevState) => {
+          return {myTeam: [...prevState.myTeam, playerToDraft]}
+        })
+      }
   }
 
   render() {
