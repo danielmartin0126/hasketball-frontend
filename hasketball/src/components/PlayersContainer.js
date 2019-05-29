@@ -13,13 +13,13 @@ class PlayersContainer extends React.Component {
 
 		findPlayers = () => {
 			return this.props.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				 return <PlayerCard draftPlayer={this.props.draftPlayer} player={player}/>
+				 return <PlayerCard myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player}/>
 			 })
 		}
 
 		findTeams = () => {
 				return this.props.players.filter(p => 		p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				return <PlayerCard draftPlayer={this.props.draftPlayer} player={player} />
+				return <PlayerCard myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
 
@@ -31,7 +31,7 @@ class PlayersContainer extends React.Component {
 
 		renderFiftyPlayers = () => {
 			return this.props.players.slice(this.props.start,this.props.end).map(player => {
-			 return <PlayerCard draftPlayer={this.props.draftPlayer} player={player} />
+			 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
 

@@ -62,14 +62,24 @@ class App extends React.Component {
     })
   }
 
+  dropPlayer = (e) => {
+    console.log(e.target.id)
+    const playersToKeep = this.state.myTeam.filter(p => p.api_id != e.target.id)
+    console.log(playersToKeep)
+    this.setState({
+      myTeam: playersToKeep
+    })
+  }
+
   render() {
+    console.log(this.state.myTeam)
     return (<div className="App">
 
         <Navbar filter={this.state.filter} backPage={this.backPage} nextPage={this.nextPage} handleFilter={this.handleFilter}/>
         <Route path="/login" render={()=> <Login />}/>
-        <Route path="/team" render={()=> <Team myTeam={this.state.myTeam}/>}/>
+        <Route path="/team" render={()=> <Team myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
         <Route path="/register" render={()=> <Register />}/>
-        <Route exact path="/" render ={() => <PlayersContainer  players={this.state.players} draftPlayer={this.draftPlayer} start={this.state.start} end={this.state.end} filtered={this.state.filtered}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer  myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end} filtered={this.state.filtered}/>}/>
     </div>
     )};
 }
