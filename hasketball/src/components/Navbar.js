@@ -11,8 +11,6 @@ class Navbar extends React.Component {
             <div className="one column row navbar" id="navbar">
 
             <h5>{this.props.currentUser ? `Welcome ${this.props.currentUser.name}` : "Sign up you asshole"}</h5>
-          
-            <h5>Welcome playername</h5>
               <Icon.Group size='huge'>
                 <Icon size='small' name='basketball ball' />
               </Icon.Group>
@@ -23,7 +21,7 @@ class Navbar extends React.Component {
             {this.props.currentUser ?  <Link to="/login">
                 <button className="ui button" onClick={this.props.handleLogout}>Logout</button>
             </Link>
-                : 
+                :
             <Link to="/login">
                 <button className="ui button">Login</button>
             </Link>
