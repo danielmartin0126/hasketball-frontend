@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
     componentDidMount() {
-      fetch('http://localhost:3000/players')
+      fetch('http://localhost:3000/api/v1/players')
         .then(r => r.json())
         .then(data => {
           this.setState({
