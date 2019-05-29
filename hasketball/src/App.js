@@ -58,14 +58,22 @@ class App extends React.Component {
 
   handleUserLogin = (user) => {
     console.log("in handle userlogin",user)
+    fetch('http://localhost:3000/api/v1/drafts')
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          myTeam: data.map(drafted => this.state.players.find(p => p.id == drafted.player_id))
+        })
+      })
     this.setState({
-      currentUser: user
+      currentUser: user,
     },console.log("State",this.state))
   }
 
   handleLogout =() => {
     this.setState({
-      currentUser: null
+      currentUser: null,
+      myTeam: []
     })
   }
 
@@ -74,10 +82,23 @@ class App extends React.Component {
   }
 
     draftPlayer = (e) => {
-    const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
-    this.setState((prevState) => {
-      return {myTeam: [...prevState.myTeam, playerToDraft]}
-    })
+      const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
+      if (!this.state.myTeam.includes(playerToDraft)) {
+        fetch('http://localhost:3000/api/v1/draft', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          player_id: playerToDraft.id
+        })
+      })
+      .then(this.setState((prevState) => {
+        return {myTeam: [...prevState.myTeam, playerToDraft]}
+      }))
+    }
   }
 
   dropPlayer = (e) => {
