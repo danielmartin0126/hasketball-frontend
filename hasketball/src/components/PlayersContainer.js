@@ -7,6 +7,7 @@ import { directive } from '@babel/types';
 
 class PlayersContainer extends React.Component {
 
+
 		fullName = (p) => {
 			return (p.f_name + " " + p.l_name)
 		}

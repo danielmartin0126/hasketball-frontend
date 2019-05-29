@@ -14,6 +14,7 @@ class App extends React.Component {
 
   state= {
     filtered: "",
+    currentUser: null,
     start: 0,
     end: 50,
     myTeam: [],
@@ -55,7 +56,24 @@ class App extends React.Component {
     })
   }
 
-  draftPlayer = (e) => {
+  handleUserLogin = (user) => {
+    console.log("in handle userlogin",user)
+    this.setState({
+      currentUser: user
+    },console.log("State",this.state))
+  }
+
+  handleLogout =() => {
+    this.setState({
+      currentUser: null
+    })
+  }
+
+  handleCreateAccount = (user) => {
+    console.log("create", user)
+  }
+  
+    draftPlayer = (e) => {
     const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
     this.setState((prevState) => {
       return {myTeam: [...prevState.myTeam, playerToDraft]}
@@ -72,16 +90,16 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.myTeam)
+    console.log("App is rendering",this.state)
     return (<div className="App">
+        <Navbar filter={this.state.filter} handleFilter={this.handleFilter} currentUser={this.state.currentUser} handleLogout={this.handleLogout backPage={this.backPage} nextPage={this.nextPage}}/>
+        <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
+        <Route path="/team" render={()=> <Team currentUser={this.state.currentUser} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
+        <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} handleCreateAccount={this.handleCreateAccount}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>}/>
 
-        <Navbar filter={this.state.filter} backPage={this.backPage} nextPage={this.nextPage} handleFilter={this.handleFilter}/>
-        <Route path="/login" render={()=> <Login />}/>
-        <Route path="/team" render={()=> <Team myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
-        <Route path="/register" render={()=> <Register />}/>
-        <Route exact path="/" render ={() => <PlayersContainer  myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end} filtered={this.state.filtered}/>}/>
     </div>
     )};
 }
 
-export default App;
+export default withRouter(App);
