@@ -1,21 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { Header, Icon } from 'semantic-ui-react'
 
 
 class Navbar extends React.Component {
 
-
-
-
-
-
-
     render(){
-       return( 
+       return(
         <div className="ui vertically divided grid">
             <div className="one column row navbar" id="navbar">
             <h5>Welcome playername</h5>
-            <h1>Hashketball</h1>
+              <Icon.Group size='huge'>
+                <Icon size='small' name='basketball ball' />
+              </Icon.Group>
+              <Header as='h1' content='Hashketball' />
             <Link to="/">
                 <button className="ui button">Home</button>
             </Link>
@@ -27,8 +25,11 @@ class Navbar extends React.Component {
             </Link>
             </div>
             <div className="one column row purple" id="searchbar">
-                <h2>Search</h2>
-                <input onChange={this.props.handleFilter}></input>
+              <button onClick={this.props.backPage} className="ui left attached button">Prev Page</button>
+              <button onClick={this.props.nextPage} className="right attached ui button">Next Page</button>
+                <div className="ui input">
+                <input placeholder="search team or player" onChange={this.props.handleFilter}></input>
+                </div>
             </div>
         </div>
 

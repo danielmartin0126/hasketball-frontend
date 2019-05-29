@@ -13,7 +13,28 @@ import Register from './components/Register';
 class App extends React.Component {
 
   state= {
-    filtered: ""
+    filtered: "",
+    start: 0,
+    end: 50
+  }
+
+  nextPage = () => {
+    if (this.state.end > 575) {
+    }
+    else {
+      this.setState( prevState => {
+        return {start: prevState.start += 50,
+          end: prevState.end += 50}
+      })
+    }
+  }
+
+  backPage = () => {
+    if (this.state.start > 0) {
+      this.setState( prevState => {
+        return {start: prevState.start -= 50, end: prevState.end -= 50}
+      })
+    }
   }
 
   handleFilter = (e) => {
@@ -25,11 +46,11 @@ class App extends React.Component {
   render() {
     return (<div className="App">
 
-        <Navbar filter={this.state.filter} handleFilter={this.handleFilter}/>
+        <Navbar filter={this.state.filter} backPage={this.backPage} nextPage={this.nextPage} handleFilter={this.handleFilter}/>
         <Route path="/login" render={()=> <Login />}/>
         <Route path="/team" render={()=> <Team />}/>
         <Route path="/register" render={()=> <Register />}/>
-        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer start={this.state.start} end={this.state.end} filtered={this.state.filtered}/>}/>
     </div>
     )};
 }
