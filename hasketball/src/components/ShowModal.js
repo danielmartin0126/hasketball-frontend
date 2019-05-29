@@ -21,10 +21,6 @@ class ShowModal extends React.Component {
 
 
   render(){
-<<<<<<< Updated upstream
-=======
-    console.log(this.state.playerStats)
->>>>>>> Stashed changes
     return(
       <Modal trigger={<div id={this.props.player.api_id} onClick={this.showStats} className="ui basic blue button">View Stats</div>}>
         <Modal.Header>{this.props.player.f_name +" "+ this.props.player.l_name}</Modal.Header>
