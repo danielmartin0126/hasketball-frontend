@@ -7,7 +7,7 @@ class Team extends React.Component {
     render() {
        return( 
        <div>
-        <h3>My Team</h3>
+        <h3>{this.props.currentUser ? this.props.currentUser.team_name : "Hi"}</h3>
         <p>Wow look at your team</p>
        </div>
        )}

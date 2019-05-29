@@ -30,17 +30,26 @@ class App extends React.Component {
     },console.log("State",this.state))
   }
 
+  handleLogout =() => {
+    this.setState({
+      currentUser: null
+    })
+  }
+
+  handleCreateAccount = (user) => {
+    console.log("create", user)
+  }
+
   render() {
     console.log("App is rendering",this.state)
     return (<div className="App">
-
-        <Navbar filter={this.state.filter} handleFilter={this.handleFilter}/>
+        <Navbar filter={this.state.filter} handleFilter={this.handleFilter} currentUser={this.state.currentUser} handleLogout={this.handleLogout}/>
         <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
-        <Route path="/team" render={()=> <Team />}/>
-        <Route path="/register" render={()=> <Register />}/>
-        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered}/>}/>
+        <Route path="/team" render={()=> <Team currentUser={this.state.currentUser}/>}/>
+        <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} handleCreateAccount={this.handleCreateAccount}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser}/>}/>
     </div>
     )};
 }
 
-export default App;
+export default withRouter(App);
