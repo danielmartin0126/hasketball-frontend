@@ -7,36 +7,19 @@ import { directive } from '@babel/types';
 
 class PlayersContainer extends React.Component {
 
-	state = {
-		players:[],
-	}
-
-    componentDidMount() {
-			fetch('http://localhost:3000/players')
-				.then(r => r.json())
-				.then(data => {
-					this.setState({
-						players:data
-					})
-				})
-    }
-
-
-
-
 		fullName = (p) => {
 			return (p.f_name + " " + p.l_name)
 		}
 
 		findPlayers = () => {
-			return this.state.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				 return <PlayerCard player={player}/>
+			return this.props.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+				 return <PlayerCard draftPlayer={this.props.draftPlayer} player={player}/>
 			 })
 		}
 
 		findTeams = () => {
-				return this.state.players.filter(p => 		p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				return <PlayerCard player={player} />
+				return this.props.players.filter(p => 		p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+				return <PlayerCard draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
 
@@ -47,8 +30,8 @@ class PlayersContainer extends React.Component {
 		}
 
 		renderFiftyPlayers = () => {
-			return this.state.players.slice(this.props.start,this.props.end).map(player => {
-			 return <PlayerCard player={player} />
+			return this.props.players.slice(this.props.start,this.props.end).map(player => {
+			 return <PlayerCard draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
 

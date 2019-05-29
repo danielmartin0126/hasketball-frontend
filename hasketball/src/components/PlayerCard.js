@@ -9,8 +9,9 @@ class PlayerCard extends React.Component {
 	}
 
 	render(){
+		console.log(this.props.player)
 		return(
-			<div className="card">
+			<div className="card" id={this.props.player.api_id}>
 		    <div className="content">
 		      <div className="header">
 		        {this.fullName()}
@@ -24,7 +25,7 @@ class PlayerCard extends React.Component {
 		    </div>
 		    <div className="extra content">
 		      <div className="ui two buttons">
-		        <div className="ui basic green button">Draft</div>
+		        <div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div>
 		        <ShowModal id={this.props.player.api_id} player={this.props.player} />
 		      </div>
 		    </div>
