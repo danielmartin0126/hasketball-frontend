@@ -13,7 +13,8 @@ import Register from './components/Register';
 class App extends React.Component {
 
   state= {
-    filtered: ""
+    filtered: "",
+    currentUser: null
   }
 
   handleFilter = (e) => {
@@ -22,11 +23,15 @@ class App extends React.Component {
     })
   }
 
+  handleUserLogin = (user) => {
+    this.setState = ({currentUser: user})
+  }
+
   render() {
     return (<div className="App">
 
         <Navbar filter={this.state.filter} handleFilter={this.handleFilter}/>
-        <Route path="/login" render={()=> <Login />}/>
+        <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin}/>}/>
         <Route path="/team" render={()=> <Team />}/>
         <Route path="/register" render={()=> <Register />}/>
         <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered}/>}/>
