@@ -18,7 +18,8 @@ class App extends React.Component {
     start: 0,
     end: 50,
     myTeam: [],
-    players: []
+    players: [],
+    drafts: []
   }
 
     componentDidMount() {
@@ -57,13 +58,12 @@ class App extends React.Component {
   }
 
   handleUserLogin = (user) => {
-    let team = ""
-    console.log("in handle userlogin",user)
     fetch('http://localhost:3000/api/v1/drafts')
       .then(r => r.json())
       .then(data => {
         this.setState({
-          myTeam: data.map(drafted => this.state.players.find(p => p.id == drafted.player_id))
+          myTeam: data.map(drafted => this.state.players.find(p => p.id == drafted.player_id)),
+          drafts: data.filter(d => d.user_id === this.state.currentUser.id)
         })
       })
     fetch(`http://localhost:3000/api/v1/users/${user.id}`)
@@ -84,12 +84,14 @@ class App extends React.Component {
     })
   }
 
+
   handleCreateAccount = (user) => {
     console.log("create", user)
     this.setState({
       currentUser: user
     })
   }
+
 
     draftPlayer = (e) => {
       const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
@@ -105,29 +107,40 @@ class App extends React.Component {
           player_id: playerToDraft.id
         })
       })
-      .then(this.setState((prevState) => {
-        return {myTeam: [...prevState.myTeam, playerToDraft]}
-      }))
+      .then(res => res.json())
+      .then(data => {
+        this.setState((prevState) => {
+        return {
+          myTeam: [...prevState.myTeam, playerToDraft],
+          drafts: [...prevState.drafts, data]
+        }
+      })
+      console.log(this.state.drafts)
+    })
     }
   }
 
   dropPlayer = (e) => {
-    console.log(e.target.id)
+    const playerToDrop = this.state.myTeam.find(p => p.api_id == e.target.id)
+    const draftDelete = this.state.drafts.find(d => d.user_id === this.state.currentUser.id && d.player_id === playerToDrop.id)
     const playersToKeep = this.state.myTeam.filter(p => p.api_id != e.target.id)
-    console.log(playersToKeep)
-    this.setState({
-      myTeam: playersToKeep
+    fetch(`http://localhost:3000/api/v1/drafts/${draftDelete.id}`, {
+    method: "DELETE"
+    })
+      .then(data => {
+        this.setState({
+          myTeam: playersToKeep
+      }, console.log(this.state.myTeam))
     })
    
   }
 
   render() {
-    console.log("App is rendering",this.state)
     return (<div className="App">
         <Navbar filter={this.state.filter} handleFilter={this.handleFilter} currentUser={this.state.currentUser} handleLogout={this.handleLogout} backPage={this.backPage} nextPage={this.nextPage}/>
         <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
         <Route path="/team" render={()=> <Team currentUser={this.state.currentUser} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
-        <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} handleCreateAccount={this.handleCreateAccount}/>}/>
+        <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} />}/>
         <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>
 
     </div>
