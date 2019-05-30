@@ -57,6 +57,7 @@ class App extends React.Component {
   }
 
   handleUserLogin = (user) => {
+    let team = ""
     console.log("in handle userlogin",user)
     fetch('http://localhost:3000/api/v1/drafts')
       .then(r => r.json())
@@ -65,9 +66,15 @@ class App extends React.Component {
           myTeam: data.map(drafted => this.state.players.find(p => p.id == drafted.player_id))
         })
       })
-    this.setState({
-      currentUser: user,
-    },console.log("State",this.state))
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`)
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          currentUser: {...user, 
+            team_name: data.team_name} 
+        },console.log("State",this.state))
+      }
+    )
   }
 
   handleLogout =() => {
@@ -79,6 +86,9 @@ class App extends React.Component {
 
   handleCreateAccount = (user) => {
     console.log("create", user)
+    this.setState({
+      currentUser: user
+    })
   }
 
     draftPlayer = (e) => {
@@ -108,6 +118,7 @@ class App extends React.Component {
     this.setState({
       myTeam: playersToKeep
     })
+   
   }
 
   render() {
