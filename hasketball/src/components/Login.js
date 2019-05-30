@@ -28,7 +28,6 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log("what you entered",this.state.fields);
     fetch('http://localhost:3000/api/v1/auth', {
       method: "POST",
       headers: {
@@ -42,7 +41,6 @@ class Login extends React.Component {
       if (data.error) {
         this.setState({error: true})
       } else {
-          console.log("giving you:",data)
         this.props.handleUserLogin(data)
         this.props.history.push("/team")
       }
@@ -50,9 +48,8 @@ class Login extends React.Component {
     }
 
     render() {
-        console.log("logprops",this.props)
         const { fields } = this.state
-       return( 
+       return(
         <div>
         <div className="ui form error">
           {

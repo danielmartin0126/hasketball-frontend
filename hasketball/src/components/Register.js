@@ -41,7 +41,7 @@ class Register extends React.Component {
          this.setState({error: true})
        } else {
            console.log("giving you:",data)
-         this.props.handleCreateAccount(data)
+         
        }
      })
      }
