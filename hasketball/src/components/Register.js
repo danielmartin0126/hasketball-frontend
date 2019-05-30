@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
 
 const initialState = {
     error: false,
@@ -44,6 +46,8 @@ class Register extends React.Component {
          this.props.handleCreateAccount(data)
        }
      })
+     .then(this.props.history.push("/")
+     )
      }
 
      render() {
@@ -95,4 +99,4 @@ class Register extends React.Component {
         )}
 
 }
-export default Register;
+export default withRouter(Register);

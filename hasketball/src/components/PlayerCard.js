@@ -1,5 +1,7 @@
 import React from 'react';
 import ShowModal from './ShowModal'
+import { withRouter } from 'react-router-dom';
+
 
 
 class PlayerCard extends React.Component {
@@ -33,4 +35,4 @@ class PlayerCard extends React.Component {
 	}
 }
 
-export default PlayerCard;
+export default withRouter(PlayerCard);
