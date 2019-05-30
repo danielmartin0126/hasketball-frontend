@@ -15,25 +15,27 @@ class Navbar extends React.Component {
               <Icon.Group size='huge'>
                 <Icon size='small' name='basketball ball' />
               </Icon.Group>
-              <Header as='h1' content='Hashketball' />
-            <Link to="/">
-                <button className="ui button">Home</button>
-            </Link>
-            {this.props.currentUser ?  <Link to="/login">
-                <button className="ui button" onClick={this.props.handleLogout}>Logout</button>
-            </Link>
-                :
-            <Link to="/login">
-                <button className="ui button">Login</button>
-            </Link>
-                }
-            <Link to="/team">
-                <button className="ui button">View Team</button>
-            </Link>
+              <Header as='h1'id="title_header" content='Hashketball' />
+              <div>
+                    <Link to="/">
+                        <button className="ui inverted button">Home</button>
+                    </Link>
+                    {this.props.currentUser ?  <Link to="/login">
+                        <button className="ui inverted button" onClick={this.props.handleLogout}>Logout</button>
+                    </Link>
+                        :
+                    <Link to="/login">
+                        <button className="ui inverted button">Login</button>
+                    </Link>
+                        }
+                    <Link to="/team">
+                        <button className="ui inverted button">View Team</button>
+                    </Link>
+                </div>
             </div>
-            <div className="one column row purple" id="searchbar">
-              <button onClick={this.props.backPage} className="ui left attached button">Prev Page</button>
-              <button onClick={this.props.nextPage} className="right attached ui button">Next Page</button>
+            <div className="one column row" id="searchbar">
+              <button onClick={this.props.backPage} className="ui left attached inverted button">Prev Page</button>
+              <button onClick={this.props.nextPage} className="right attached ui inverted button">Next Page</button>
                 <div className="ui input">
                 <input placeholder="search team or player" onChange={this.props.handleFilter}></input>
                 </div>
