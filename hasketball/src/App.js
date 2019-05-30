@@ -66,9 +66,15 @@ class App extends React.Component {
           drafts: data.filter(d => d.user_id === this.state.currentUser.id)
         })
       })
-    this.setState({
-      currentUser: user,
-    },console.log(""))
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`)
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          currentUser: {...user, 
+            team_name: data.team_name} 
+        },console.log("State",this.state))
+      }
+    )
   }
 
   handleLogout =() => {
@@ -77,6 +83,15 @@ class App extends React.Component {
       myTeam: []
     })
   }
+
+
+  handleCreateAccount = (user) => {
+    console.log("create", user)
+    this.setState({
+      currentUser: user
+    })
+  }
+
 
     draftPlayer = (e) => {
       const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
@@ -117,6 +132,7 @@ class App extends React.Component {
           myTeam: playersToKeep
       }, console.log(this.state.myTeam))
     })
+   
   }
 
   render() {

@@ -3,6 +3,8 @@ import PlayerCard from './PlayerCard';
 import '../App.css';
 import ShowModal from './ShowModal'
 import { directive } from '@babel/types';
+import { withRouter } from 'react-router-dom';
+
 
 
 class PlayersContainer extends React.Component {
@@ -52,4 +54,4 @@ class PlayersContainer extends React.Component {
 
 
 
-export default PlayersContainer;
+export default withRouter(PlayersContainer);
