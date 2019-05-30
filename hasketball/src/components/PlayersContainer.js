@@ -42,7 +42,7 @@ class PlayersContainer extends React.Component {
     render(){
         return(
 					<React.Fragment>
-						<div className="ui cards">
+						<div className="ui cards Playarea">
 								{this.props.filtered.length > 0 ? this.renderSearch() : this.renderFiftyPlayers()}
 						</div>
 			</React.Fragment>

@@ -1,3 +1,9 @@
+body {
+  color: #8B898A;
+  background-color:#121617;
+}
+
+
 .App {
   text-align: center;
 }
@@ -20,7 +26,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #E55322;
 }
 
 @keyframes App-logo-spin {
@@ -33,11 +39,40 @@
 }
 
 #navbar {
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 2%;
+  background-image:linear-gradient(#8B898A,#303335);
+  background-color: #303335;
+}
+
+.basketball {
+  color: #E55322;
 }
 
 #searchbar {
   justify-content: center;
   margin-bottom: 2%;
+  background-color: #303335;
+  background-image: linear-gradient(#303335,#121617);
+}
+
+.header {
+  color: #8B898A;
+}
+
+#title_header {
+  color: #9BA2FF;
+}
+
+.Playarea {
+  background-color: #121617;
+  justify-content: center;
+}
+
+.card {
+  background-color: #DFDEDF !important
+}
+
+.modal {
+  background-color: #DFDEDF !important
 }
