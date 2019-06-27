@@ -6,6 +6,18 @@ import { withRouter } from 'react-router-dom';
 
 class Navbar extends React.Component {
 
+    renderSearch = () => {
+        return (
+            <div>
+                <button onClick={this.props.backPage} className="ui left attached inverted button">Prev Page</button>
+                <button onClick={this.props.nextPage} className="right attached ui inverted button">Next Page</button>
+                <div className="ui input">
+                <input placeholder="search team or player" onChange={this.props.handleFilter}></input>
+                </div>
+          </div>
+        )
+    }
+
     render(){
        return(
         <div className="ui vertically divided grid">
@@ -34,12 +46,8 @@ class Navbar extends React.Component {
                 </div>
             </div>
             <div className="one column row" id="searchbar">
-              <button onClick={this.props.backPage} className="ui left attached inverted button">Prev Page</button>
-              <button onClick={this.props.nextPage} className="right attached ui inverted button">Next Page</button>
-                <div className="ui input">
-                <input placeholder="search team or player" onChange={this.props.handleFilter}></input>
-                </div>
-            </div>
+                {this.props.location.pathname === "/" ? this.renderSearch() : null }
+          </div>
         </div>
 
 

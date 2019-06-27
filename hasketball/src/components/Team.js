@@ -4,8 +4,11 @@ import PlayerCard from './PlayerCard'
 import { withRouter } from 'react-router-dom';
 
 
-
 class Team extends React.Component {
+
+
+
+    
     render() {
        return(
        <div>
