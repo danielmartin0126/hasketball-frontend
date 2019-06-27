@@ -21,7 +21,7 @@ class PlayersContainer extends React.Component {
 		}
 
 		findTeams = () => {
-				return this.props.players.filter(p => 		p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
+				return this.props.players.filter(p => p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
 				return <PlayerCard myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
@@ -32,19 +32,31 @@ class PlayersContainer extends React.Component {
 			return foo
 		}
 
-		renderFiftyPlayers = () => {
+		renderAllPlayers = () => {
 			return this.props.players.slice(this.props.start,this.props.end).map(player => {
 			 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} />
 			})
 		}
 
+		renderAvailablePlayers = () => {
+			console.log("im in here help", this.props.availablePlayers)
+			return this.props.availablePlayers.slice(this.props.start,this.props.end).map(player => {
+			 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} />
+			})
+		}
+
+		decideRender = () => {
+			return this.props.currentUser ? this.renderAvailablePlayers() : this.renderAllPlayers() 
+		}
+
 
     render(){
+		console.log("yahooooo", this.props.currentUser)
         return(
-					<React.Fragment>
-						<div className="ui cards Playarea">
-								{this.props.filtered.length > 0 ? this.renderSearch() : this.renderFiftyPlayers()}
-						</div>
+			<React.Fragment>
+				<div className="ui cards Playarea">
+					{ this.decideRender() }
+				</div>
 			</React.Fragment>
 				)
 		}

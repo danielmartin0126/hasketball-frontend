@@ -19,6 +19,7 @@ class App extends React.Component {
     end: 50,
     myTeam: [],
     players: [],
+    availablePlayers: [],
     drafts: []
   }
 
@@ -62,6 +63,7 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         this.setState({
+          availablePlayers: this.state.players.filter(p => !data.find(d => d.player_id === p.id)),
           myTeam: data.filter(d => d.user_id === user.id).map(drafted => this.state.players.find(p => p.id == drafted.player_id)),
           drafts: data.filter(d => d.user_id === user.id)
         })
@@ -141,7 +143,7 @@ class App extends React.Component {
         <Route path="/login" render={()=> <Login handleUserLogin={this.handleUserLogin} currentUser={this.state.currentUser}/>}/>
         <Route path="/team" render={()=> <Team currentUser={this.state.currentUser} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
         <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} />}/>
-        <Route exact path="/" render ={() => <PlayersContainer filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>
+        <Route exact path="/" render ={() => <PlayersContainer availablePlayers={this.state.availablePlayers} filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>}/>
 
     </div>
     )};
