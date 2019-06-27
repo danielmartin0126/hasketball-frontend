@@ -62,8 +62,8 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         this.setState({
-          myTeam: data.map(drafted => this.state.players.find(p => p.id == drafted.player_id)),
-          drafts: data.filter(d => d.user_id === this.state.currentUser.id)
+          myTeam: data.filter(d => d.user_id === user.id).map(drafted => this.state.players.find(p => p.id == drafted.player_id)),
+          drafts: data.filter(d => d.user_id === user.id)
         })
       })
     fetch(`http://localhost:3000/api/v1/users/${user.id}`)
