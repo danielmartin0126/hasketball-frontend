@@ -10,6 +10,14 @@ class PlayerCard extends React.Component {
 		return `${this.props.player.f_name} ${this.props.player.l_name}`
 	}
 
+	draftAndDrop = () => {
+	   return this.props.myTeam.includes(this.props.player) ? <div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div> : <div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div>
+	}
+
+	handleButtons = () => {
+		return this.props.location.pathname === "/team" || this.props.location.pathname === "/" ? this.draftAndDrop() : null
+	}
+
 	render(){
 		return(
 			<div className="card" id={this.props.player.api_id}>
@@ -25,8 +33,8 @@ class PlayerCard extends React.Component {
 		    </div>
 		    <div className="extra content">
 		      <div className="ui two buttons">
-		        {this.props.myTeam.includes(this.props.player) ? <div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div> : <div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div>}
-		        <ShowModal id={this.props.player.api_id} player={this.props.player}  className="modal"/>
+		        {this.handleButtons()}
+		        <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
 		      </div>
 		    </div>
 		  </div>

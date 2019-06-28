@@ -76,3 +76,15 @@ body {
 .modal {
   background-color: #DFDEDF !important
 }
+
+.formContainer {
+  text-align: center;
+}
+
+.form {
+  display: inline-block;
+}
+
+#submitButton {
+  padding-top: 20px;
+}
