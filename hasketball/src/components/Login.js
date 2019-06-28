@@ -4,11 +4,11 @@ import { withRouter } from 'react-router-dom';
 
 
 const initialState = {
-    error: false,
-    fields: {
-        username: "",
-        password: ""
-    }
+  error: false,
+  fields: {
+    username: "",
+    password: ""
+  }
 }
 
 
@@ -17,8 +17,8 @@ const initialState = {
 class Login extends React.Component {
 
    constructor() {
-       super();
-       this.state = initialState
+     super();
+     this.state = initialState
    }
 
    handleChange = e => {
@@ -45,12 +45,12 @@ class Login extends React.Component {
         this.props.history.push("/team")
       }
     })
-    }
+  }
 
-    render() {
-        const { fields } = this.state
-       return(
-        <div>
+  render() {
+    const { fields } = this.state
+    return(
+      <div className="formContainer">
         <div className="ui form error">
           {
             this.state.error &&
@@ -58,7 +58,7 @@ class Login extends React.Component {
               Try Again
             </div>
           }
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="form">
             <div className="ui field">
               <label>Username</label>
               <input
@@ -68,28 +68,28 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="ui field">
-              <label>Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="password"
-                value={fields.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <button type="submit" className="ui basic green button">
-              Login
-            </button>
+              <div className="ui field">
+                <label>Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="password"
+                  value={fields.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button type="submit" className="ui basic green button">
+                Login
+              </button>
           </form>
+        </div><br/>
+      <div id="submitButton">
+          <Link to="/register">
+            <button className="ui basic purple button">Register</button>
+          </Link>
         </div>
-        <Link to="/register">
-                <button className="ui button">Register</button>
-        </Link>
-       </div>
-       )}
-
-
-
+      </div>
+    )
+  }
 }
 export default withRouter(Login);
