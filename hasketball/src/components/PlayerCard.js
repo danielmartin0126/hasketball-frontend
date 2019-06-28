@@ -11,11 +11,13 @@ class PlayerCard extends React.Component {
 	}
 
 	draftAndDrop = () => {
-	   return this.props.myTeam.includes(this.props.player) ? <div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div> : <div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div>
+	   return this.props.myTeam.includes(this.props.player) ? <div className="ui two buttons"><div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div><ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/></div> :
+		 <div className="ui two buttons"><div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div> <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/> </div>
 	}
 
 	handleButtons = () => {
-		return this.props.location.pathname === "/team" || this.props.location.pathname === "/" ? this.draftAndDrop() : null
+		console.log("handleButtons", this.props.currentUser)
+		return this.props.location.pathname === "/team" && this.props.currentUser !== null ? this.draftAndDrop() : <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
 	}
 
 	render(){
@@ -32,10 +34,7 @@ class PlayerCard extends React.Component {
 		      </div>
 		    </div>
 		    <div className="extra content">
-		      <div className="ui two buttons">
-		        {this.handleButtons()}
-		        <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
-		      </div>
+		      {this.handleButtons()}
 		    </div>
 		  </div>
 		)
