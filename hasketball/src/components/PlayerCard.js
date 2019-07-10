@@ -16,8 +16,8 @@ class PlayerCard extends React.Component {
 	}
 
 	handleButtons = () => {
-		console.log("handleButtons", this.props.currentUser)
-		return this.props.location.pathname === "/team" && this.props.currentUser !== null ? this.draftAndDrop() : <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
+		// console.log("handleButtons", this.props.currentUser)
+		return this.props.currentUser !== null ? this.draftAndDrop() : <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
 	}
 
 	render(){

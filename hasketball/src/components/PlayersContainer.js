@@ -8,40 +8,73 @@ import { withRouter } from 'react-router-dom';
 
 
 class PlayersContainer extends React.Component {
-
-
 		fullName = (p) => {
 			return (p.f_name + " " + p.l_name)
 		}
 
 		findPlayers = () => {
-			return this.props.players.filter(p => this.fullName(p).toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				 return <PlayerCard myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player}/>
-			 })
+			const foundPlayers = []
+			if (this.props.currentUser) {
+				let filteredPlayers = this.props.availablePlayers.filter(p => {
+					return this.fullName(p).toLowerCase().includes(this.props.filtered.toLowerCase())
+				})
+				foundPlayers.push(filteredPlayers)
+			} else {
+				let filteredPlayers = this.props.players.filter(p => {
+					return this.fullName(p).toLowerCase().includes(this.props.filtered.toLowerCase())
+				})
+				foundPlayers.push(filteredPlayers)
+			}
+			return foundPlayers
 		}
 
 		findTeams = () => {
-				return this.props.players.filter(p => p.team_name.toLowerCase().indexOf(this.props.filtered.toLowerCase()) !== -1).map(player => {
-				return <PlayerCard myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
-			})
+			const foundTeam = []
+			if (this.props.currentUser) {
+				let filteredTeams = this.props.availablePlayers.filter(p => {
+				 return p.team_name.toLowerCase().includes(this.props.filtered.toLowerCase())
+			 })
+			 foundTeam.push(filteredTeams)
+			} else {
+				 let filteredTeams = this.props.players.filter(p => {
+ 					return p.team_name.toLowerCase().includes(this.props.filtered.toLowerCase())
+ 				})
+ 				foundTeam.push(filteredTeams)
+			}
+			return foundTeam
 		}
 
 
-		renderSearch = () => {
-			let foo = [this.findTeams(), this.findPlayers()]
-			return foo
+		filteredPlayersAndTeams = () => {
+			let teamsAndPlayers = [...this.findTeams(), ...this.findPlayers()]
+			let merged = [].concat.apply([], teamsAndPlayers);
+			return merged
 		}
 
 		renderAllPlayers = () => {
-			return this.props.players.slice(this.props.start,this.props.end).map(player => {
-			 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
-			})
+			if (this.props.filtered.length > 0) {
+				const pagePlayers = this.filteredPlayersAndTeams().slice(this.props.start, this.props.end)
+				return pagePlayers.map(player => {
+					return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
+				})
+
+			} else {
+				return this.props.players.slice(this.props.start,this.props.end).map(player => {
+				 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
+				})
+			}
 		}
 
 		renderAvailablePlayers = () => {
-			return this.props.availablePlayers.slice(this.props.start,this.props.end).map(player => {
-			 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
-			})
+			if (this.props.filtered.length) {
+				return this.filteredPlayersAndTeams().slice(this.props.start,this.props.end).map(player => {
+				 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
+				})
+			} else {
+				return this.props.availablePlayers.slice(this.props.start,this.props.end).map(player => {
+				 return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />
+				})
+			}
 		}
 
 		decideRender = () => {
