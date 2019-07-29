@@ -23,7 +23,7 @@ class Navbar extends React.Component {
         <div className="ui vertically divided grid">
             <div className="one column row navbar" id="navbar">
 
-            <h5>{this.props.currentUser ? `Welcome ${this.props.currentUser.name}` : "Sign up you asshole"}</h5>
+            <h5>{this.props.currentUser ? `Welcome ${this.props.currentUser.name}` : "Sign up"}</h5>
               <Icon.Group size='huge'>
                 <Icon size='small' name='basketball ball' />
               </Icon.Group>
