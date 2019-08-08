@@ -88,7 +88,7 @@ class PlayersContainer extends React.Component {
       return(
 				<React.Fragment>
 					<div className="ui cards Playarea">
-						{ this.decideRender() }
+						{this.decideRender()}
 					</div>
 				</React.Fragment>
 			)

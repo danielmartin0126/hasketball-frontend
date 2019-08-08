@@ -21,6 +21,7 @@ class PlayerCard extends React.Component {
 	}
 
 	render(){
+		console.log(this.props)
 		return(
 			<div className="card" id={this.props.player.api_id}>
 		    <div className="content">
