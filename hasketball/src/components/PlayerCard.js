@@ -10,12 +10,12 @@ class PlayerCard extends React.Component {
 		return `${this.props.player.f_name} ${this.props.player.l_name}`
 	}
 
-	// draftAndDrop = () => {
+	// playerCardButtonManager = () => {
 	//    return this.props.myTeam.includes(this.props.player) ? <div className="ui two buttons"><div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div><ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/></div> :
 	// 	 <div className="ui two buttons"><div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div> <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/> </div>
 	// }
 
-	draftAndDrop = () => {
+	playerCardButtonManager = () => {
 		if (this.props.myTeam.includes(this.props.player)) {
 			return <div className="ui two buttons"><div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div><ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/></div>
 		} else if (this.props.location.pathname === "/users" && !this.props.myTeam.includes(this.props.player)) {
@@ -27,7 +27,7 @@ class PlayerCard extends React.Component {
 
 	handleButtons = () => {
 		// console.log("handleButtons", this.props.currentUser)
-		return this.props.currentUser !== null ? this.draftAndDrop() : <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
+		return this.props.currentUser !== null ? this.playerCardButtonManager() : <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/>
 	}
 
 	render(){
