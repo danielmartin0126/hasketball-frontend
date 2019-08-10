@@ -5,7 +5,7 @@
   "engines": {
   "npm": "6.10.3",
   "node": "11.14.0"
-}
+},
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
