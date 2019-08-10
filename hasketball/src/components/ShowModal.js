@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Header, Image, Modal } from 'semantic-ui-react'
 import teamLogos from '../teamLogos'
 
 
@@ -9,7 +9,7 @@ class ShowModal extends React.Component {
   }
 
   showStats = (e) => {
-    fetch("https://www.balldontlie.io/api/v1/season_averages?player_ids[]=" + `${e.target.id}`)
+    fetch(`https://www.balldontlie.io/api/v1/season_averages?player_ids[]=${e.target.id}`)
     .then(r => r.json())
     .then(data => {
       this.setState({

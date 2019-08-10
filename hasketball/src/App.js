@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import PlayersContainer from './components/PlayersContainer';
 import Navbar from './components/Navbar';
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import Login from './components/Login';
 import Team from './components/Team';
 import Register from './components/Register';
@@ -89,7 +88,6 @@ class App extends React.Component {
 
 
   handleCreateAccount = (user) => {
-    console.log("create", user)
     this.setState({
       currentUser: user
     })
@@ -137,7 +135,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.drafts)
     return (<div className="App">
         <Navbar
           filter={this.state.filter}

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PlayerCard from './PlayerCard'
 import { withRouter } from 'react-router-dom';
 
