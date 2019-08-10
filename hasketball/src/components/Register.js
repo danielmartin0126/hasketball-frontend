@@ -28,7 +28,7 @@ class Register extends React.Component {
    handleSubmit = e => {
      e.preventDefault()
      console.log("what you entered",this.state.fields);
-     fetch('http://localhost:3000/api/v1/register', {
+     fetch('https://hashketball-backend.herokuapp.com/api/v1/register', {
        method: "POST",
        headers: {
          'Content-Type': 'application/json',

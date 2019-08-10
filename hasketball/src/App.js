@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
     componentDidMount() {
-      fetch('http://localhost:3000/api/v1/players')
+      fetch('https://hashketball-backend.herokuapp.com/api/v1/players')
         .then(r => r.json())
         .then(data => {
           this.setState({
@@ -59,7 +59,7 @@ class App extends React.Component {
   }
 
   handleUserLogin = (user) => {
-    fetch('http://localhost:3000/api/v1/drafts')
+    fetch('https://hashketball-backend.herokuapp.com/api/v1/drafts')
       .then(r => r.json())
       .then(data => {
         this.setState({
@@ -68,7 +68,7 @@ class App extends React.Component {
           drafts: data.filter(d => d.user_id === user.id)
         })
       })
-    fetch(`http://localhost:3000/api/v1/users/${user.id}`)
+    fetch(`https://hashketball-backend.herokuapp.com/api/v1/users/${user.id}`)
       .then(r => r.json())
       .then(data => {
         this.setState({
@@ -97,7 +97,7 @@ class App extends React.Component {
     draftPlayer = (e) => {
       const playerToDraft = this.state.players.find(p => p.api_id == e.target.id)
       if (!this.state.myTeam.includes(playerToDraft)) {
-        fetch('http://localhost:3000/api/v1/draft', {
+        fetch('https://hashketball-backend.herokuapp.com/api/v1/draft', {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ class App extends React.Component {
     const playerToDrop = this.state.myTeam.find(p => p.api_id == e.target.id)
     const draftDelete = this.state.drafts.find(d => d.user_id === this.state.currentUser.id && d.player_id === playerToDrop.id)
     const playersToKeep = this.state.myTeam.filter(p => p.api_id != e.target.id)
-    fetch(`http://localhost:3000/api/v1/drafts/${draftDelete.id}`, {
+    fetch(`https://hashketball-backend.herokuapp.com/api/v1/drafts/${draftDelete.id}`, {
       method: "DELETE"
     })
     .then(data => {

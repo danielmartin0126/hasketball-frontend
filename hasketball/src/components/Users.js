@@ -10,12 +10,12 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/users')
+    fetch('https://hashketball-backend.herokuapp.com/api/v1/users')
     .then(r=>r.json())
     .then(data => {
       this.setState({users: data})
     })
-    fetch('http://localhost:3000/api/v1/drafts')
+    fetch('https://hashketball-backend.herokuapp.com/api/v1/drafts')
     .then(r=>r.json())
     .then(data => {
       this.setState({drafts: data})
