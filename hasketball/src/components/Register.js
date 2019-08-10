@@ -43,7 +43,6 @@ class Register extends React.Component {
          this.setState({error: true})
        } else {
            console.log("giving you:",data)
-         
        }
      })
      .then(this.props.history.push("/")
@@ -53,7 +52,7 @@ class Register extends React.Component {
      render() {
          const { fields } = this.state
         return(
-         <div>
+         <div className="formContainer">
          <div className="ui form error">
            {
              this.state.error &&

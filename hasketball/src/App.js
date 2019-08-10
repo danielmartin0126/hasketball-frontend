@@ -7,6 +7,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import Login from './components/Login';
 import Team from './components/Team';
 import Register from './components/Register';
+import Users from './components/Users'
 
 
 
@@ -136,6 +137,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.drafts)
     return (<div className="App">
         <Navbar
           filter={this.state.filter}
@@ -149,9 +151,11 @@ class App extends React.Component {
         <Route path="/team" render={()=> <Team currentUser={this.state.currentUser} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer}/>}/>
         <Route path="/register" render={()=> <Register currentUser={this.state.currentUser} />}/>
         <Route exact path="/" render ={() => <PlayersContainer availablePlayers={this.state.availablePlayers} filtered={this.state.filtered} currentUser={this.state.currentUser} myTeam={this.state.myTeam} players={this.state.players} draftPlayer={this.draftPlayer} dropPlayer={this.dropPlayer} start={this.state.start} end={this.state.end}/>} />
-
+        <Route extact path="/users" render={()=> <Users players={this.state.players} currentUser={this.state.currentUser} draftPlayer={this.draftPlayer} myTeam={this.state.myTeam} dropPlayer={this.dropPlayer} /> } />
     </div>
     )};
 }
+
+
 
 export default withRouter(App);

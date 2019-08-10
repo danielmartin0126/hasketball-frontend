@@ -43,6 +43,9 @@ class Navbar extends React.Component {
                     <Link to="/team">
                         <button className="ui inverted button">View Team</button>
                     </Link>
+                    <Link to="/users">
+                      <button className="ui inverted button">View Users</button>
+                    </Link>
                 </div>
             </div>
             <div className="one column row" id="searchbar">
