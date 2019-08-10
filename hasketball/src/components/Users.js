@@ -39,7 +39,7 @@ class Users extends React.Component {
     return this.state.users.map(user => {
       return (
         <div>
-          <div><h2>{user.name}</h2></div><br/>
+          <div><h2>{user.team_name}</h2></div><br/>
           <div className="ui cards Playarea">
           {this.findUserPlayers(user.id).map(player => {
             return <PlayerCard dropPlayer={this.props.dropPlayer} myTeam={this.props.myTeam} draftPlayer={this.props.draftPlayer} player={player} currentUser={this.props.currentUser} />

@@ -41,8 +41,7 @@ class PlayerCard extends React.Component {
 		      <div className="meta">
 		        Postion: {this.props.player.position}
 		      </div>
-		      <div className="description">
-		      </div>
+		    
 		    </div>
 		    <div className="extra content">
 		      {this.handleButtons()}
