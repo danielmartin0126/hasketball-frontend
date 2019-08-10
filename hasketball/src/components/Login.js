@@ -79,7 +79,7 @@ class Login extends React.Component {
                 />
               </div>
               <button type="submit" className="ui basic green button">
-                Login
+                <label>Login</label>
               </button>
           </form>
         </div><br/>

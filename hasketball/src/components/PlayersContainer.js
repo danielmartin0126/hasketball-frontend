@@ -1,8 +1,6 @@
 import React from 'react';
 import PlayerCard from './PlayerCard';
 import '../App.css';
-import ShowModal from './ShowModal'
-import { directive } from '@babel/types';
 import { withRouter } from 'react-router-dom';
 
 

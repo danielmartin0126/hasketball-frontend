@@ -10,11 +10,6 @@ class PlayerCard extends React.Component {
 		return `${this.props.player.f_name} ${this.props.player.l_name}`
 	}
 
-	// playerCardButtonManager = () => {
-	//    return this.props.myTeam.includes(this.props.player) ? <div className="ui two buttons"><div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div><ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/></div> :
-	// 	 <div className="ui two buttons"><div className="ui basic green button" onClick={this.props.draftPlayer} id={this.props.player.api_id}>Draft</div> <ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/> </div>
-	// }
-
 	playerCardButtonManager = () => {
 		if (this.props.myTeam.includes(this.props.player)) {
 			return <div className="ui two buttons"><div className="ui basic red button" onClick={this.props.dropPlayer} id={this.props.player.api_id}>Drop</div><ShowModal id={this.props.player.api_id} player={this.props.player} className="modal"/></div>
@@ -31,7 +26,6 @@ class PlayerCard extends React.Component {
 	}
 
 	render(){
-		console.log(this.props)
 		return(
 			<div className="card" id={this.props.player.api_id}>
 		    <div className="content">
@@ -41,7 +35,7 @@ class PlayerCard extends React.Component {
 		      <div className="meta">
 		        Postion: {this.props.player.position}
 		      </div>
-		    
+
 		    </div>
 		    <div className="extra content">
 		      {this.handleButtons()}
